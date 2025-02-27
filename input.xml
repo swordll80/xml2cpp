@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Example>
+	<node1 att1="" att2="" nodeCount="1" />
+	<node2 att1="" nodeCount="2">
+		<node3 att1="" att2="" nodeCount="2">1</node3>
+	</node2>
+</Example>
