@@ -92,7 +92,7 @@ def generate_class_code(node_info):
     
     # Member variables
     for attr, attr_type in node_info.attributes.items():
-        code += f"    {attr_type["type"]} {attr};\n"
+        code += f'    {attr_type["type"]} {attr};\n'
     if node_info.has_text:
         if node_info.text_type == "int":
             code += "    int text;\n"
