@@ -571,3 +571,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+generate_temp.py
+generate_xsd_temp.py
