@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:complexType name="tn_node1">
+    <xs:attribute name="att1" type="xs:string" use="required"/>
+    <xs:attribute name="att2" type="xs:string" use="required"/>
+    <xs:attribute name="att3" type="xs:string" use="required"/>
+</xs:complexType>
+
+<xs:complexType name="tn_node2">
+    <xs:sequence>
+        <xs:element name="node3" type="tn_node3" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="att1" type="xs:string" use="required"/>
+</xs:complexType>
+
+<xs:complexType name="tn_node3">
+    <xs:simpleContent>
+        <xs:extension base="xs:string">
+            <xs:attribute name="att1" type="xs:string" use="required"/>
+            <xs:attribute name="att2" type="xs:string"/>
+        </xs:extension>
+    </xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="tn_node4">
+    <xs:sequence>
+        <xs:element name="node5" type="tn_node5" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="att1" type="xs:string" use="required"/>
+</xs:complexType>
+
+<xs:complexType name="tn_node5">
+    <xs:simpleContent>
+        <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="tn_node6">
+    <xs:sequence>
+        <xs:element name="node7" type="tn_node7" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="att1" type="xs:string" use="required"/>
+</xs:complexType>
+
+<xs:complexType name="tn_node7">
+    <xs:simpleContent>
+        <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+</xs:complexType>
+
+<xs:element name="Example">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="node1" type="tn_node1" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="node2" type="tn_node2" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="node4" type="tn_node4" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="node6" type="tn_node6" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+</xs:schema>

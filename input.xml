@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Example>
-	<node1 att1="" att2="" nodeCount="1" />
-	<node2 att1="" nodeCount="2">
-		<node3 att1="" att2="" nodeCount="2">1</node3>
+	<node1 att1="i" att2="f" att3="s" nodeCount="1" />
+	<node2 att1="">
+		<node3 att1="" att2="s0">s</node3>
 	</node2>
+	<node4 att1="0">
+		<node5>i</node5>
+	</node4>
+	<node6 att1="">
+		<node7>f</node7>
+	</node6>
 </Example>

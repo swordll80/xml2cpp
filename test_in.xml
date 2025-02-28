@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Example xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="output.xsd">
+	<node1 att1="42" att2="3.14" att3="s"/>
+	<node2 att1="s">
+		<node3 att1="s" att2="">s</node3>
+	</node2>
+	<node4 att1="s">
+		<node5>36</node5>
+	</node4>
+	<node6 att1="">
+		<node7>2.7</node7>
+	</node6>
+</Example>
