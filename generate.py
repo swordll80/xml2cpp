@@ -6,10 +6,10 @@ class NodeInfo:
     def __init__(self, name):
         self.name = name
         self.attributes = {}  # {attr_name: {"type": "xs:string", "required": bool}}
-        self.text_type = None  # text �����ͣ�int, float, std::string��
+        self.text_type = None  # text 类型 int, float, std::string
         self.has_text = False
         self.children = {}  # {child_name: ChildInfo}
-        self.node_count = 2  # Ĭ��ֵΪ 2
+        self.node_count = 2  # 节点出现次数的类型，默认值2，出现不定次。1时只出现一次。
 
 class ChildInfo:
     def __init__(self, name, node_count):
@@ -73,12 +73,12 @@ def parse_xml(xml_file):
             elif text_value == "s":
                 node_info.text_type = "std::string"
             else:
-                node_info.text_type = "std::string"  # Ĭ������
+                node_info.text_type = "std::string"
 
-        # �����ӽڵ�
+        # 
         for child in element:
             child_name = child.tag
-            child_node_count = int(child.attrib.get("nodeCount", 2))  # Ĭ��ֵΪ 2
+            child_node_count = int(child.attrib.get("nodeCount", 2))
             if child_name not in node_info.children:
                 node_info.children[child_name] = ChildInfo(child_name, child_node_count)
             process_element(child, node_name)
@@ -186,9 +186,9 @@ def generate_class_code(node_info):
     code += f"    void write(pugi::xml_node& node) const {{\n"
     for attr, attr_type in node_info.attributes.items():
         if attr_type["type"] == "int":
-            code += f'        node.append_attribute("{attr}") = {attr};\n'  # ֱ�Ӹ�ֵ int
+            code += f'        node.append_attribute("{attr}") = {attr};\n'
         elif attr_type["type"] == "float":
-            code += f'        node.append_attribute("{attr}") = {attr};\n'  # ֱ�Ӹ�ֵ float
+            code += f'        node.append_attribute("{attr}") = {attr};\n'
         else:
             # 如果属性值以 "0" 结尾且类型为 std::string，则检查是否为空
             if not attr_type["required"]:
