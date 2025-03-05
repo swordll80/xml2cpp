@@ -102,7 +102,7 @@ def generate_class_code(node_info):
             code += "    std::string text;\n"
     for child_name, child_info in node_info.children.items():
         if child_info.node_count == 1:
-            code += f"    {child_info.name} {child_name};\n"
+            code += f"    {child_info.name} {child_name}_obj;\n"
         else:
             code += f"    std::vector<{child_info.name}*> {child_name}_vec;\n"
 
@@ -125,7 +125,7 @@ def generate_class_code(node_info):
         code += "        text = other.text;\n"
     for child_name, child_info in node_info.children.items():
         if child_info.node_count == 1:
-            code += f"        {child_name} = other.{child_name};\n"
+            code += f"        {child_name}_obj = other.{child_name}_obj;\n"
         else:
             code += f"        for (auto p : other.{child_name}_vec) {{\n"
             code += f"            auto obj = new {child_info.name}(*p);\n"
@@ -143,7 +143,7 @@ def generate_class_code(node_info):
         code += "            text = other.text;\n"
     for child_name, child_info in node_info.children.items():
         if child_info.node_count == 1:
-            code += f"            {child_name} = other.{child_name};\n"
+            code += f"            {child_name}_obj = other.{child_name}_obj;\n"
         else:
             code += f"            for (auto p : {child_name}_vec) delete p;\n"
             code += f"            {child_name}_vec.clear();\n"
@@ -172,7 +172,7 @@ def generate_class_code(node_info):
             code += '        text = node.text().as_string();\n'
     for child_name, child_info in node_info.children.items():
         if child_info.node_count == 1:
-            code += f'        {child_name}.read(node.child("{child_name}"));\n'
+            code += f'        {child_name}_obj.read(node.child("{child_name}"));\n'
         else:
             code += f'        for (auto child : node.children("{child_name}")) {{\n'
             code += f'            auto obj = new {child_info.name}();\n'
@@ -206,8 +206,8 @@ def generate_class_code(node_info):
             code += '        node.text().set(text.c_str());\n'
     for child_name, child_info in node_info.children.items():
         if child_info.node_count == 1:
-            code += f'        pugi::xml_node child_node = node.append_child("{child_name}");\n'
-            code += f'        {child_name}.write(child_node);\n'
+            code += f'        pugi::xml_node child_node_{child_name} = node.append_child("{child_name}");\n'
+            code += f'        {child_name}_obj.write(child_node_{child_name});\n'
         else:
             code += f'        for (auto p : {child_name}_vec) {{\n'
             code += f'            pugi::xml_node child_node = node.append_child("{child_name}");\n'
@@ -253,7 +253,7 @@ def generate_header(nodes, root_name, output_file):
         #include <iostream>
         #include <string>
         #include <vector>
-        #include "pugixml.hpp"
+        #include "../pugixml/pugixml.hpp"
         
         namespace {root_name}NS {{
         """))
